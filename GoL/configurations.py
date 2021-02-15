@@ -138,7 +138,10 @@ class Configuration:
         toWrite = ' {} {}'.format(str(self.generation).ljust(12), str(self.generationConfigurations).ljust(17))
         
         for c in self.configurations:
-            percentage = "{:02.1f}%".format(self.configurations[c] / float (self.generationConfigurations) * 100.0).zfill(5)
+            if self.generationConfigurations > 0:
+                percentage = "{:02.1f}%".format(self.configurations[c] / float (self.generationConfigurations) * 100.0).zfill(5)
+            else:
+                percentage = "00.00%"
             
             toWrite += '{} {} {}'.format("".ljust(len(c)+1), str(self.configurations[c]).ljust(8), percentage.ljust(13))
             self.configurations[c] = 0
